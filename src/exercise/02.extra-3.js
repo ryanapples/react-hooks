@@ -3,7 +3,7 @@
 
 import * as React from 'react'
 
-function useLocalStorageState(key, defaultValue) {
+function useLocalStorageState(key, defaultValue = '') {
   const [state, setState] = React.useState(
     () => window.localStorage.getItem(key) ?? defaultValue,
   )
