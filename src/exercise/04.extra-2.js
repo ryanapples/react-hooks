@@ -2,18 +2,22 @@
 // http://localhost:3000/isolated/exercise/04.js
 
 import * as React from 'react'
+import {useLocalStorageState} from '../utils'
 
 function Board() {
-  const [squares, setSquares] = React.useState(Array(9).fill(null))
+  const [squares, setSquares] = useLocalStorageState(
+    'squares',
+    Array(9).fill(null),
+  )
 
   const nextValue = calculateNextValue(squares)
   const winner = calculateWinner(squares)
   const status = calculateStatus(winner, squares, nextValue)
 
-  // This is the function your square click handler will call. `square` should
-  // be an index. So if they click the center square, this will be `4`.
   function selectSquare(square) {
-    if (winner || squares[square]) return
+    if (winner || squares[square]) {
+      return
+    }
 
     const squaresCopy = [...squares]
     squaresCopy[square] = nextValue
